@@ -49,3 +49,25 @@ export const getOrganization = async (req: Request, res: Response) => {
     }
 
 }
+
+export const postOrganization = async (req: Request, res: Response) => {
+
+    try {
+
+        const { body } = req;
+
+        const organization = await Organization.create(body);
+
+        res.json({
+            organization
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Error en creacion de organizacion'
+        });
+    }
+
+}
