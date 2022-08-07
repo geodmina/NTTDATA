@@ -71,3 +71,44 @@ export const postOrganization = async (req: Request, res: Response) => {
     }
 
 }
+
+export const putOrganization = async (req: Request, res: Response) => {
+
+
+    try {
+
+        const { id } = req.params;
+        const { body } = req;
+
+        const organization = await Organization.findOne({ where: { id: id } });
+
+        if (organization === null) {
+            res.status(204).json({
+                msg: 'Organizacion no encontrada'
+            });
+        } else {
+
+            organization.update({
+                name: body['name'],
+                status: body['status']
+            }).then((organization) => {
+                res.json({
+                    organization
+                });
+            }).catch((error) => {
+                console.log(error);
+                res.status(500).json({
+                    msg: 'Error en la actualizacion de organizacion'
+                });
+            });
+
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Error en la actualizacion de organizacion'
+        });
+    }
+
+}
