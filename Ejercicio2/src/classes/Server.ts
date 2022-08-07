@@ -53,7 +53,7 @@ class Server {
             console.log('Conexion DB abierta');
 
             Organization.sync({
-                force: false,
+                force: true,
             })
                 .then(function () {
                     console.log('Tabla Creada');
