@@ -2,7 +2,7 @@ import Sequelize from 'sequelize-cockroachdb';
 import db from '../db/connection';
 
 const Organization = db.define('Organization', {
-    id_organizacion: {
+    id_organization: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,

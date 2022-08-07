@@ -27,7 +27,7 @@ export const getOrganization = async (req: Request, res: Response) => {
 
         const { id } = req.params;
 
-        const organization = await Organization.findOne({ where: { id_organizacion: id } });
+        const organization = await Organization.findOne({ where: { id_organization: id } });
 
         if (organization === null) {
             res.status(204).json({
@@ -80,7 +80,7 @@ export const putOrganization = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { body } = req;
 
-        const organization = await Organization.findOne({ where: { id: id } });
+        const organization = await Organization.findOne({ where: { id_organization: id } });
 
         if (organization === null) {
             res.status(204).json({
@@ -111,4 +111,41 @@ export const putOrganization = async (req: Request, res: Response) => {
         });
     }
 
+}
+
+export const deleteOrganization = async (req: Request, res: Response) => {
+
+    try {
+
+        const { id } = req.params;
+        const { body } = req;
+
+        const organization = await Organization.findOne({ where: { id_organization: id } });
+
+        if (organization === null) {
+            res.status(204).json({
+                msg: 'Organizacion no encontrada'
+            });
+        } else {
+
+            organization.destroy().then(async (organization) => {
+                const organizations = await Organization.findAll();
+                res.json({
+                    organizations
+                });
+            }).catch((error) => {
+                console.log(error);
+                res.status(500).json({
+                    msg: 'Error en la eliminacion de organizacion'
+                });
+            });
+
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Error en la eliminacion de organizacion'
+        });
+    }
 }
