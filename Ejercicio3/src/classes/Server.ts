@@ -7,13 +7,15 @@ import Organization from '../models/organization';
 import Tribe from '../models/tribe';
 import Repository from '../models/repository';
 import Metric from '../models/metric';
+import consultanRoutes from '../routes/consultaRoutes';
 
 class Server {
 
     private app: Application;
     private port: String;
     private apiPaths = {
-        repository: '/api/organization'
+        repository: '/api/organization',
+        tribe: '/api/tribe'
     };
 
     constructor() {
@@ -34,7 +36,8 @@ class Server {
 
     routes() {
 
-        this.app.use(this.apiPaths.repository, organizationRoutes)
+        this.app.use(this.apiPaths.repository, organizationRoutes);
+        this.app.use(this.apiPaths.tribe, consultanRoutes);
 
     }
 
@@ -55,7 +58,7 @@ class Server {
             await db.authenticate();
             console.log('Conexion DB abierta');
 
-            Organization.sync({
+            await Organization.sync({
                 force: true,
             })
                 .then(function () {
@@ -83,7 +86,7 @@ class Server {
                     process.exit(1);
                 });
 
-            Tribe.sync({
+            await Tribe.sync({
                 force: true,
             })
                 .then(function () {
@@ -114,7 +117,7 @@ class Server {
                     process.exit(1);
                 });
 
-            Repository.sync({
+            await Repository.sync({
                 force: true,
             })
                 .then(function () {
@@ -195,7 +198,7 @@ class Server {
                     process.exit(1);
                 });
 
-            Metric.sync({
+            await Metric.sync({
                 force: true,
             })
                 .then(function () {
@@ -209,56 +212,56 @@ class Server {
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 2,
                             coverage: 56.09,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 3,
                             coverage: 80,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 4,
                             coverage: 15.3,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 5,
                             coverage: 50,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 6,
                             coverage: 60.5,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 7,
                             coverage: 95.2,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 8,
                             coverage: 100,
                             bugs: 0,
                             vulnerabilities: 5,
                             hotspot: 3,
                             code_smells: 0
-                        },{
+                        }, {
                             id_repository: 9,
                             coverage: 15.0,
                             bugs: 0,

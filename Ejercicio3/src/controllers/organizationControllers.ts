@@ -44,7 +44,7 @@ export const getOrganization = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            msg: 'Error en la actualizacion de organizacion'
+            msg: 'Error en la consulta de organizacion'
         });
     }
 
